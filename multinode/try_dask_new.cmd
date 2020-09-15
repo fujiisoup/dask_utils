@@ -1,21 +1,23 @@
 #!/bin/bash
+
+#SBATCH --account=GT5DSTC  # Account number
+
 #SBATCH -J try_dask        # job name
-#SBATCH -N 11              # Number of nodes
-#SBATCH -n 11              # The number of tasks (jobs)
+#SBATCH -N 5              # Number of nodes
+#SBATCH -n 5              # The number of tasks (jobs)
 #SBATCH -c 10              # logical cores per task
                            # (1 node: 80 logical, 40 physical)
-#SBATCH --account=GT5DSTC  # Account number
 #SBATCH --time 00:10:00    # hh|mm|ss
 #SBATCH --mem 60GB         # Memory
 #SBATCH -p S-M             # Job class
-#SBATCH -o 0_launcher%j.out
-#SBATCH -e 0_launcher%j.err
+#SBATCH -o 0_launcher.out
+#SBATCH -e 0_launcher.err
 
 # Usage
 # sbatch try_dask.cmd
 
 # Number of nodes (cannot define before SBATCH commands)
-NODES=11
+NODES=5
 echo $NODES
 
 # Clean worker folder
@@ -39,11 +41,13 @@ sleep 20
 
 # Start worker
 WORKERS=$((NODES - 1))
-echo srun -N $WORKERS -n $WORKERS --exclude=$SCHEDULER dask-worker --scheduler-file $SCHEDFILE --local-directory $WORKDIR &
-srun -N $WORKERS -n $WORKERS --exclude=$SCHEDULER dask-worker --scheduler-file $SCHEDFILE --local-directory $WORKDIR &
+echo srun -N $WORKERS -n $WORKERS --exclude=$SCHEDULER dask-worker --scheduler-file $SCHEDFILE --local-directory $WORKDIR
+srun -N $WORKERS -n $WORKERS --exclude=$SCHEDULER dask-worker --scheduler-file $SCHEDFILE --local-directory $WORKDIR
+
+echo HEUREKA
 
 # If cluster is ready, you can use Client(scheduler_file='$SCHEDFILE')
 # - In Jupyter Notebook on login node
 # - In Python from login node
 # - Or directly here:
-/home/dheim/miniconda3/bin/python try_dask.py
+# /home/dheim/miniconda3/bin/python try_dask.py
