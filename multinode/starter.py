@@ -2,30 +2,22 @@ from dask.distributed import Client
 import subprocess
 import time
 import os
+import multinode.sbatch as sbatch
 
 
 def start_cluster(nodes: int):
-    # Read in the file
-    with open('multinode/try_dask.cmd', 'r') as file:
-        filedata = file.read()
-
-    # Replace the target string
-    filedata = filedata.replace('-N 11', '-N '+str(nodes))
-    filedata = filedata.replace('-n 11', '-n '+str(nodes))
-    filedata = filedata.replace('NODES=11', 'NODES='+str(nodes))
-
-    # Write the file out again
     pid = os.getpid()
+    s = sbatch.get_sbatch(nodes)
     with open('multinode/try_dask_{}.cmd'.format(pid), 'w') as file:
-        file.write(filedata)
+        file.write(s)
 
     # Popen does not wait, but how do I know WHEN all nodes are there and then workers connected?
     # e.g. check_call does wait, but when command ends: all resouces canceled
     subprocess.Popen(['sbatch', 'multinode/try_dask_{}.cmd'.format(pid)],
-                           stdout=subprocess.PIPE, universal_newlines=True)
+                     stdout=subprocess.PIPE, universal_newlines=True)
 
     client = Client(scheduler_file='cluster.json')
-    client.wait_for_workers(8)
+    client.wait_for_workers(nodes-2)
     time.sleep(5)
 
     return client

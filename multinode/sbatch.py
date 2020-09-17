@@ -1,10 +1,13 @@
-#!/bin/bash
+
+
+def get_sbatch(nodes: int):
+    s = """#!/bin/bash
 
 #SBATCH --account=GT5DSTC  # Account number
 
 #SBATCH -J try_dask        # job name
-#SBATCH -N 10              # Number of nodes
-#SBATCH -n 10              # The number of tasks (jobs)
+#SBATCH -N {}              # Number of nodes
+#SBATCH -n {}              # The number of tasks (jobs)
 #SBATCH -c 10              # logical cores per task
                            # (1 node: 80 logical, 40 physical)
 #SBATCH --time 00:10:00    # hh|mm|ss
@@ -17,7 +20,7 @@
 # sbatch try_dask.cmd
 
 # Number of nodes (cannot define before SBATCH commands)
-NODES=10
+NODES={}
 echo $NODES
 
 # Clean worker folder
@@ -51,3 +54,5 @@ echo HEUREKA
 # - In Python from login node
 # - Or directly here:
 # /home/dheim/miniconda3/bin/python try_dask.py
+""".format(nodes, nodes, nodes)
+    return s
