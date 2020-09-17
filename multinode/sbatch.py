@@ -3,7 +3,6 @@ def get_sbatch(nodes, job_path):
     return """#!/bin/bash
 
 #SBATCH --account=GT5DSTC  # Account number
-
 #SBATCH -J try_dask        # job name
 #SBATCH -N {}              # Number of nodes
 #SBATCH -n {}              # The number of tasks (jobs)

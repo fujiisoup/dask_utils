@@ -1,6 +1,5 @@
 from dask_ml.decomposition import PCA
 import dask.array as da
-import numpy as np
 from multinode import starter
 import time
 
