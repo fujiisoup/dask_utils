@@ -3,6 +3,7 @@ import subprocess
 import time
 import os
 import multinode.sbatch as sbatch
+import multinode.scluster as scluster
 
 
 def start_cluster(nodes: int):
@@ -16,7 +17,10 @@ def start_cluster(nodes: int):
         os.makedirs(worker_path)
 
     cluster_file = os.path.join(job_path, "cluster.json")
-    s = sbatch.get_sbatch(nodes, job_path, worker_path, cluster_file)
+
+    s = sbatch.get_sbatch(nodes, job_path)
+    s += scluster.get_scluster(nodes, worker_path, cluster_file)
+
     starter_script = '{}/starter-script-{}.cmd'.format(job_path, pid)
     with open(starter_script, 'w') as file:
         file.write(s)
