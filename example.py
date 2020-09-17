@@ -8,9 +8,10 @@ import time
 # - Return actual dashboard-address or write to file
 # - Add get_client() arguments: cluster specific infos (e.g. nb of nodes)
 # - scheduler_file_name
-# - ((((Make class: Member variables: srun parameters (e.g. project name))?))
-# - Make documentation
-# - Make multiple clusters runnable
+# - Make documentation, example in readme.md
+# - Make multiple clusters runnable (prefix: python pid (todo: slurm pid))
+# - Create python package (Setup.py, install with pip -e
+# - Test import in file outside of this repo
 
 
 scheduler_file_name = starter.start_cluster(nodes=10)

@@ -9,3 +9,6 @@ worker*
 *.err
 *.out
 *cluster.json
+
+# Multinode
+*.cmd
