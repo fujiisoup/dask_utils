@@ -1,3 +1,6 @@
+from dask_ml.decomposition import PCA
+import dask.array as da
+import numpy as np
 from multinode import starter
 import time
 
@@ -15,15 +18,11 @@ import time
 
 client = starter.start_cluster(nodes=10)
 print(client)
-print("hi")
 
 # Example: PCA with 240 GB
 # - On login node: 57 s
 # - On cluster, 10 nodes, each 10 C and 60GB: 25 s
-
-import numpy as np
-import dask.array as da
-from dask_ml.decomposition import PCA
+print("start example")
 x = da.random.random((100000, 300000), chunks=(10000, 10000))
 print(x.nbytes/1e9)
 pca = PCA(n_components=2)
