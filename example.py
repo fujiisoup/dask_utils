@@ -4,16 +4,11 @@ from multinode import starter
 import time
 
 # TODO: Keisuke-Whishlist
-# - Write template script and sbatch it (instad of modifying template)
 # - Add dashboard-address wish as argument
 # - Return actual dashboard-address or write to file
-# - Add get_client() arguments: cluster specific infos (e.g. nb of nodes)
-# - scheduler_file_name
 # - Make documentation, example in readme.md
-# - Make multiple clusters runnable (prefix: python pid (todo: slurm pid))
 # - Create python package (Setup.py, install with pip -e
 # - Test import in file outside of this repo
-
 
 client = starter.start_cluster(nodes=10)
 print(client)
