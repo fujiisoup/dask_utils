@@ -6,22 +6,25 @@ import multinode.sbatch as sbatch
 import multinode.scluster as scluster
 
 
-def start_cluster(nodes: int):
+def _get_paths():
     pid = os.getpid()
-
     job_path = "multinode-{}".format(pid)
     if not os.path.exists(job_path):
         os.makedirs(job_path)
     worker_path = os.path.join(job_path, "worker")
     if not os.path.exists(worker_path):
         os.makedirs(worker_path)
+    return job_path, worker_path
 
+
+def start_cluster(nodes: int):
+    job_path, worker_path = _get_paths()
     cluster_file = os.path.join(job_path, "cluster.json")
 
     s = sbatch.get_sbatch(nodes, job_path)
     s += scluster.get_scluster(nodes, worker_path, cluster_file)
 
-    starter_script = '{}/starter-script-{}.cmd'.format(job_path, pid)
+    starter_script = '{}/starter-script.cmd'.format(job_path)
     with open(starter_script, 'w') as file:
         file.write(s)
 
