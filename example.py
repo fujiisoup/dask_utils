@@ -3,16 +3,6 @@ import dask.array as da
 from multinode import starter
 import time
 
-# TODO: Keisuke-Whishlist
-# 1. scheduler als long as workers
-# 2. applied for all resources at once
-#    (good if big jobs more important) 
-# - Add dashboard-address wish as argument
-# - Return actual dashboard-address or write to file
-# - Make documentation, example in readme.md
-# - Create python package (Setup.py, install with pip -e
-# - Test import in file outside of this repo
-
 # Example: PCA with 240 GB
 # - On login node: 57 s
 # - On cluster: 25 s

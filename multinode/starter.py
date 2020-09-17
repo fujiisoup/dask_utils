@@ -30,12 +30,11 @@ def start_cluster(account_name, job_name, n_workers,
     with open(starter_script, 'w') as file:
         file.write(s)
 
-    # Popen does not wait for process end
     subprocess.Popen(['sbatch', starter_script],
                      stdout=subprocess.PIPE, universal_newlines=True)
 
-    client = Client(scheduler_file=cluster_file)
-    client.wait_for_workers(n_workers)
+    cluster = Client(scheduler_file=cluster_file)
+    cluster.wait_for_workers(n_workers)
     time.sleep(5)
 
-    return client
+    return cluster
