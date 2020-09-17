@@ -1,7 +1,7 @@
 from dask.distributed import Client
 import subprocess
-import time
 import os
+import time
 import multinode.sbatch as sbatch
 import multinode.scluster as scluster
 
@@ -17,12 +17,14 @@ def _get_paths():
     return job_path, worker_path
 
 
-def start_cluster(nodes: int):
+def start_cluster(account_name, job_name, n_workers,
+                  n_cores, run_time, mem, job_class):
     job_path, worker_path = _get_paths()
     cluster_file = os.path.join(job_path, "cluster.json")
 
-    s = sbatch.get_sbatch(nodes, job_path)
-    s += scluster.get_scluster(nodes, worker_path, cluster_file)
+    s = sbatch.get_sbatch(account_name, job_name, n_workers,
+                          n_cores, run_time, mem, job_class, job_path)
+    s += scluster.get_scluster(n_workers, worker_path, cluster_file)
 
     starter_script = '{}/starter-script.cmd'.format(job_path)
     with open(starter_script, 'w') as file:
@@ -33,7 +35,7 @@ def start_cluster(nodes: int):
                      stdout=subprocess.PIPE, universal_newlines=True)
 
     client = Client(scheduler_file=cluster_file)
-    client.wait_for_workers(nodes-2)
+    client.wait_for_workers(n_workers)
     time.sleep(5)
 
     return client
