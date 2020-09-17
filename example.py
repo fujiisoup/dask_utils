@@ -14,12 +14,7 @@ import time
 # - Test import in file outside of this repo
 
 
-scheduler_file_name = starter.start_cluster(nodes=10)
-
-client = Client(scheduler_file=scheduler_file_name)
-client.wait_for_workers(8)
-time.sleep(5)
-
+client = starter.start_cluster(nodes=10)
 print(client)
 print("hi")
 

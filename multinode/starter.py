@@ -21,10 +21,14 @@ def start_cluster(nodes: int):
 
     # Popen does not wait, but how do I know WHEN all nodes are there and then workers connected?
     # e.g. check_call does wait, but when command ends: all resouces canceled
-    cmd = subprocess.Popen(['sbatch', 'multinode/try_dask_{}.cmd'.format(pid)],
+    subprocess.Popen(['sbatch', 'multinode/try_dask_{}.cmd'.format(pid)],
                            stdout=subprocess.PIPE, universal_newlines=True)
 
-    return 'cluster.json'
+    client = Client(scheduler_file='cluster.json')
+    client.wait_for_workers(8)
+    time.sleep(5)
+
+    return client
 
 
 # Interactive multiprocess
