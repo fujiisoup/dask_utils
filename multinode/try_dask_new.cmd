@@ -3,8 +3,8 @@
 #SBATCH --account=GT5DSTC  # Account number
 
 #SBATCH -J try_dask        # job name
-#SBATCH -N 5              # Number of nodes
-#SBATCH -n 5              # The number of tasks (jobs)
+#SBATCH -N 10              # Number of nodes
+#SBATCH -n 10              # The number of tasks (jobs)
 #SBATCH -c 10              # logical cores per task
                            # (1 node: 80 logical, 40 physical)
 #SBATCH --time 00:10:00    # hh|mm|ss
@@ -17,7 +17,7 @@
 # sbatch try_dask.cmd
 
 # Number of nodes (cannot define before SBATCH commands)
-NODES=5
+NODES=10
 echo $NODES
 
 # Clean worker folder

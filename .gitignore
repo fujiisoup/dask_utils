@@ -6,3 +6,6 @@
 
 # Dask
 worker*
+*.err
+*.out
+*cluster.json
