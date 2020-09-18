@@ -14,7 +14,8 @@ cluster = starter.start_cluster(
     n_cores=10,
     run_time="00:10:00",
     mem="60GB",
-    job_class="S-M")
+    job_class="S-M",
+    dash_port_wish=23456)
 print(cluster)
 
 print("start example")
