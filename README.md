@@ -6,6 +6,7 @@ In this way
 - The Dask client is allocated earlier in clusters where large jobs are preferrec (compared to single node allocations)
 
 ## TODOs
+- [x] Test dashboard
 - [ ] Add dashboard-address wish as argument
 - [ ] Return actual dashboard-address or write to file
 - [ ] Beautify code
