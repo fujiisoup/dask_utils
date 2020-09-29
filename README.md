@@ -6,12 +6,13 @@ In this way
 - The Dask client is allocated earlier in clusters where large jobs are preferrec (compared to single node allocations)
 
 ## TODOs
-- [ ] Add dashboard-address wish as argument
-- [ ] Return actual dashboard-address or write to file
+- [x] Return actual dashboard-address or write to file
 - [x] Test dashboard
-- [ ] Beautify code
+- [ ] Create Setup.py
+- [ ] Test install with pip -e and import in file outside of this repo
 - [ ] Make documentation
   - Docstrings
   - Example usage
-- [ ] Create Setup.py
-- [ ] Test install with pip -e and import in file outside of this repo
+  - Output file descritp
+- [ ] Beautify code
+- [ ] Add more info to command line output

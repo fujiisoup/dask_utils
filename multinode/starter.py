@@ -43,6 +43,5 @@ def start_cluster(account_name, job_name, n_workers,
     dash_addr = dash_addr.split(':')
     dash_addr = dash_addr[1][2:] + ":" + \
         str(scheduler_info['services']['dashboard'])
-    print(dash_addr)
 
     return cluster, dash_addr
