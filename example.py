@@ -15,7 +15,7 @@ cluster, dash_addr = starter.start_cluster(
 print("Cluster info: {}".format(cluster))
 print("- Dashboard address: {}".format(dash_addr))
 
-# Example rund: PCA with 240 GB
+# Example run: PCA of 240 GB
 # - On login node: 57 s
 # - On cluster: 25 s
 print("Start example")

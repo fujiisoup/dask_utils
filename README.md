@@ -50,13 +50,13 @@ and the folder
 - **worker/**: One folder for each worker containing its stderr
 
 ## TODOs
-- [x] Return actual dashboard-address or write to file
-- [x] Test dashboard
+- [x] Return dashboard-address
+- [x] Check if dashboard-address works
 - [x] Create setup.py
 - [x] Test install with pip -e and import in file outside of this repo
 - [x] Make documentation
   - Write example usage
-  - Add output file descritp
+  - Add output file description
 - [ ] Beautify code
   - Add Docstrings
 - [ ] Add more info to command line output
