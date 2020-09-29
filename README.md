@@ -62,3 +62,4 @@ and the folder
 - [ ] Add more info to command line output
 - [ ] Add tests
 - [ ] Use job ID instead of PID
+- [ ] Add function stop_cluster()
