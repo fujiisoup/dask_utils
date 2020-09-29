@@ -63,3 +63,4 @@ and the folder
 - [ ] Add tests
 - [ ] Use job ID instead of PID
 - [ ] Add function stop_cluster()
+- [ ] Add timeout to waiting for cluster to be initialized
