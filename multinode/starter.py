@@ -18,15 +18,14 @@ def _get_paths():
 
 
 def start_cluster(account_name, job_name, n_workers,
-                  n_cores, run_time, mem, job_class,
-                  dash_port_wish):
+                  n_cores, run_time, mem, job_class):
     job_path, worker_path = _get_paths()
     cluster_file = os.path.join(job_path, "cluster.json")
 
     s = sbatch.get_sbatch(account_name, job_name, n_workers,
                           n_cores, run_time, mem, job_class, job_path)
     s += scluster.get_scluster(n_workers, worker_path,
-                               cluster_file, dash_port_wish)
+                               cluster_file)
 
     starter_script = '{}/starter-script.cmd'.format(job_path)
     with open(starter_script, 'w') as file:
@@ -42,7 +41,8 @@ def start_cluster(account_name, job_name, n_workers,
     scheduler_info = cluster.scheduler_info()
     dash_addr = scheduler_info['address']
     dash_addr = dash_addr.split(':')
-    dash_addr = dash_addr[1][2:] + ":" + str(scheduler_info['services']['dashboard'])
+    dash_addr = dash_addr[1][2:] + ":" + \
+        str(scheduler_info['services']['dashboard'])
     print(dash_addr)
 
     return cluster, dash_addr

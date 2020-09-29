@@ -1,5 +1,5 @@
 
-def get_scluster(n_workers, worker_path, cluster_file, dash_port_wish):
+def get_scluster(n_workers, worker_path, cluster_file):
     return """
 # Select scheduler name
 SCHEDULER=$(srun hostname | head -1)
@@ -16,5 +16,5 @@ sleep 20
 srun -N {} -n {} --exclude=$SCHEDULER \\
     dask-worker --scheduler-file {} --local-directory {}
 
-""".format(cluster_file, dash_port_wish, n_workers, n_workers,
+""".format(cluster_file, n_workers, n_workers,
            cluster_file, worker_path)
