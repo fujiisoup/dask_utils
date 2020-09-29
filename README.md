@@ -61,3 +61,4 @@ and the folder
   - Add Docstrings
 - [ ] Add more info to command line output
 - [ ] Add tests
+- [ ] Use job ID instead of PID
