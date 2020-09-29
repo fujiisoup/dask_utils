@@ -31,7 +31,7 @@ def run_script(account_name, job_name, n_workers,
     starter_script = '{}/starter-script.cmd'.format(out_path)
     with open(starter_script, 'w') as file:
         file.write(s)
-    # Start script
+    # Start script: Popen does not wait
     subprocess.Popen(['sbatch', starter_script],
                      stdout=subprocess.PIPE, universal_newlines=True)
     return cluster_file
@@ -40,6 +40,7 @@ def run_script(account_name, job_name, n_workers,
 def start_client(cluster_file, n_workers):
     cluster = Client(scheduler_file=cluster_file)
     cluster.wait_for_workers(n_workers)
+    return cluster
 
 
 def get_dash_addr(cluster):
